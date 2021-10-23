@@ -5,10 +5,20 @@ import "./App.css";
 
 // React Hooks -> Gove Functional Components the Ability to Have and change their state
 
+const colors = [
+  "teal",
+  "red",
+  "pink",
+  "blue",
+  "magento",
+  "yellow",
+  "#bada55",
+  "khaki",
+];
+
 function App() {
   const [count, setCount] = useState(0);
   const [isDarkMode, setIsDarkMode] = useState(false);
-  console.log("isDarkMode:", isDarkMode);
 
   function increment() {
     setCount(count + 1);
@@ -16,12 +26,20 @@ function App() {
   }
 
   function decrement() {
-    // count--;
+    // count--f;
+    if (count === 0) {
+      setCount(0);
+      return;
+    }
     setCount(count - 1);
   }
 
   function toggleEyeSuffering() {
     setIsDarkMode(!isDarkMode);
+  }
+
+  function feelingLucky() {
+    setCount(Math.floor(Math.random() * 100000000));
   }
 
   let appHeaderClass = `App-header`;
@@ -40,10 +58,18 @@ function App() {
   return (
     <div className="App">
       <header className={appHeaderClass}>
+        <div
+          style={{
+            height: "30vh",
+            width: "100vw",
+            backgroundColor: colors[count % colors.length],
+          }}
+        ></div>
         <img src={logo} className="App-logo" alt="logo" />
         <button onClick={decrement}>Decrement button</button>
         <div>This has been clicked {count} times</div>
         <button onClick={increment}>Increment count</button>
+        <button onClick={feelingLucky}>I'm feeling lucky</button>
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
